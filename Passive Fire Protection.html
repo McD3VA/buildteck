@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+<title>Passive Fire Protection - KrisJoe Buildteck</title>
+<!-- Google Fonts: Inter & Newsreader / Playfair Display style italic serif -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Lenis Smooth Scroll CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#f95707',
+              orangeHover: '#e04c03',
+              dark: '#0a1118',
+              slate: '#111b24',
+              muted: '#64748b',
+              lightGray: '#f8fafc',
+              border: '#e2e8f0'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            editorial: ['"Instrument Serif"', 'Georgia', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS for specific typography, aesthetics, and micro-layouts -->
+<style data-purpose="typography">
+    /* Lenis Smooth Scroll Setup */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .accent-serif {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+    .tracking-widest-plus {
+      letter-spacing: 0.15em;
+    }
+  </style>
+<style data-purpose="custom-utilities">
+    /* Subtle overlay gradients for hero image */
+    .hero-gradient-overlay {
+      background: linear-gradient(108deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.85) 34%, rgba(255,255,255,0.2) 65%, rgba(255,255,255,0) 100%);
+    }
+
+    /* SCROLL-BY-SCROLL REPEATABLE REVEAL & SLIDE-UP ANIMATION */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(42px) translateZ(0);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+
+    .scroll-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) translateZ(0);
+    }
+
+    /* Sequential Stagger Delays */
+    .delay-1 { transition-delay: 90ms; }
+    .delay-2 { transition-delay: 180ms; }
+    .delay-3 { transition-delay: 270ms; }
+    .delay-4 { transition-delay: 360ms; }
+    .delay-5 { transition-delay: 450ms; }
+
+    /* Top Reading Progress Bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #f95707;
+      width: 0%;
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-brand-orange selection:text-white">
+
+<!-- Top Progress Indicator -->
+<div id="scroll-progress"></div>
+
+<!-- BEGIN: NavigationBar -->
+<header class="w-full bg-white sticky top-0 z-50 transition-all border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a class="flex flex-col select-none group" data-purpose="site-brand-logo" href="#">
+      <span class="text-2xl font-black tracking-tight text-black leading-none flex items-center">
+        <span class="text-brand-orange">KRIS</span>JOE
+      </span>
+      <span class="text-[10px] font-extrabold tracking-[0.28em] text-black mt-1 leading-none">
+        BUILDTECK
+      </span>
+    </a>
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex items-center space-x-9 text-sm font-semibold text-gray-700" data-purpose="main-navigation">
+      <a class="text-black transition-colors hover:text-brand-orange" href="buildtech.html">Home</a>
+      <a class="hover:text-brand-orange transition-colors" href="aboutusbuildtek.html">About</a>
+      <div class="relative group">
+        <div class="relative group">
+          <button class="flex items-center gap-1.5 hover:text-brand-orange transition-colors py-2 focus:outline-none">
+            <a href="services.html" class="hover:text-brand-orange transition-colors">Services</a>
+            <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-brand-orange transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </button>
+          <!-- Services Dropdown -->
+          <div class="absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-2">
+              <a href="Construction.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Construction</a>
+              <a href="Interiors.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Interiors</a>
+              <a href="Residential Developments.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Residential</a>
+              <a href="Fire_Doors.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Fire Doors</a>
+              <a href="Passive Fire Protection.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Fire Protection</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="hover:text-brand-orange transition-colors" href="projects.html">Projects</a>
+      <a class="hover:text-brand-orange transition-colors" href="contact.html">Contact</a>
+    </nav>
+    <!-- Right Header Actions (CTA) -->
+    <div class="flex items-center gap-3">
+      <a class="inline-flex items-center gap-2 bg-[#ff5a00] hover:bg-[#ea5200] text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200" href="https://wa.me/916361725590?text=Hello,%20I%20would%20like%20to%20get%20a%20quote%20for%20Passive%20Fire%20Protection." target="_blank" rel="noopener noreferrer">
+        <span>Get a Quote</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+<!-- END: NavigationBar -->
+
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 lg:pb-24" data-purpose="hero-section">
+<!-- Outer container with curved card wrapping image and content -->
+<div class="relative w-full rounded-3xl overflow-hidden bg-gray-100 min-h-[580px] lg:min-h-[640px] flex items-center shadow-sm">
+<!-- Background industrial fireproofing photo replaced with postimg link -->
+<div class="absolute inset-0 scroll-reveal">
+<img alt="Passive Fire Protection on Industrial Ceiling" class="w-full h-full object-cover object-center lg:object-[center_right]" src="https://imgh.in/host/upc728"/>
+</div>
+<!-- Overlay for legible high-contrast left text -->
+<div class="absolute inset-0 hero-gradient-overlay"></div>
+<!-- Upper right floating side vertical indicator badge -->
+<div class="scroll-reveal delay-3 hidden md:flex absolute top-10 right-10 z-20 items-start space-x-3.5 max-w-[210px] text-right pointer-events-none">
+<div class="w-0.5 h-14 bg-gray-400/80 mt-0.5"></div>
+</div>
+<!-- Left Hero Content -->
+<div class="relative z-10 max-w-xl pl-8 sm:pl-12 lg:pl-16 py-12 lg:py-20">
+<!-- Eyebrow label -->
+<div class="scroll-reveal flex items-center gap-3 mb-6">
+<span class="w-8 h-0.5 bg-brand-orange"></span>
+<span class="text-xs font-bold uppercase tracking-widest text-gray-700">
+        PASSIVE FIRE PROTECTION
+      </span>
+</div>
+<!-- Main Hero Headline -->
+<h1 class="scroll-reveal delay-1 text-4xl sm:text-5xl lg:text-[58px] font-extrabold text-[#080d14] tracking-tight leading-[1.08] mb-5">
+        Invisible protection <br/>
+        for <span class="accent-serif text-[#f2580c] font-normal tracking-normal text-[1.12em] leading-none">safer buildings.</span>
+</h1>
+<!-- Subtitle -->
+<p class="scroll-reveal delay-2 text-base sm:text-lg text-gray-600 font-normal leading-relaxed max-w-md mb-9">
+        Passive fire protection solutions designed to contain fire, protect structures and save lives.
+      </p>
+<!-- Action Buttons Area -->
+<div class="scroll-reveal delay-3 flex flex-wrap items-center gap-6 sm:gap-7">
+<!-- Dark Primary CTA Pill -->
+<a class="inline-flex items-center gap-2.5 bg-[#0b131b] hover:bg-black text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg" href="https://wa.me/916361725590?text=Hello,%20I%20would%20like%20to%20explore%20Passive%20Fire%20Protection." target="_blank" rel="noopener noreferrer">
+<span>Explore Passive Fire Protection</span>
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</a>
+<!-- Video Play Secondary Action -->
+<button aria-label="Watch how it works" class="flex items-center gap-3.5 group focus:outline-none">
+<span class="w-11 h-11 rounded-full bg-white/90 shadow-sm border border-gray-200/80 flex items-center justify-center text-gray-900 group-hover:scale-105 group-hover:bg-white transition-transform">
+<svg class="w-4 h-4 translate-x-0.5 fill-current" viewBox="0 0 24 24">
+<path d="M8 5v14l11-7z"></path>
+</svg>
+</span>
+<span class="text-left text-xs font-bold leading-tight text-gray-800 group-hover:text-brand-orange transition-colors">
+            Watch<br/>How It Works
+          </span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+
+<!-- BEGIN: WhatWeDoSection -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20" data-purpose="what-we-do-section">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+<!-- Left Column: Copy & 2x2 Services Grid -->
+<div class="lg:col-span-6 flex flex-col justify-center">
+<!-- Category Eyebrow -->
+<div class="scroll-reveal flex items-center gap-3 mb-5">
+<span class="w-7 h-0.5 bg-brand-orange"></span>
+<span class="text-xs font-bold uppercase tracking-widest text-gray-700">WHAT WE DO</span>
+</div>
+<!-- Section Title -->
+<h2 class="scroll-reveal delay-1 text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#091019] tracking-tight leading-[1.12] mb-5">
+        Protection <br/>
+<span class="accent-serif text-[#f2580c] text-[1.14em] font-normal leading-none">where it matters.</span>
+</h2>
+<!-- Descriptive Paragraph -->
+<p class="scroll-reveal delay-2 text-base text-gray-600 font-normal leading-relaxed mb-12 max-w-lg">
+        We provide certified passive fire protection solutions that help buildings meet safety standards and ensure long-term structural integrity.
+      </p>
+<!-- 2x2 Features Grid -->
+<div class="scroll-reveal delay-3 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+<!-- Item 1: Fire Stopping -->
+<div class="space-y-3">
+<div class="w-9 h-9 text-gray-900">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M9.879 16.121A3 3 0 1012.001 11c-.5 1-1.5 2-2.122 5.121z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-base font-bold text-gray-950">Fire Stopping</h3>
+<p class="text-xs sm:text-[13px] text-gray-600 leading-relaxed">
+          Sealing openings to prevent the spread of fire, smoke and heat.
+        </p>
+</div>
+<!-- Item 2: Fire Proofing -->
+<div class="space-y-3">
+<div class="w-9 h-9 text-gray-900">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-base font-bold text-gray-950">Fire Proofing</h3>
+<p class="text-xs sm:text-[13px] text-gray-600 leading-relaxed">
+          Protecting structural elements for enhanced fire resistance.
+        </p>
+</div>
+<!-- Item 3: Duct & Service Protection -->
+<div class="space-y-3">
+<div class="w-9 h-9 text-gray-900">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M4 7v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7M4 7h16M4 7l2-4h12l2 4M9 11v4m6-4v4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-base font-bold text-gray-950">Duct &amp; Service Protection</h3>
+<p class="text-xs sm:text-[13px] text-gray-600 leading-relaxed">
+          Fire protection for ducts, pipes and building services penetrations.
+        </p>
+</div>
+<!-- Item 4: Compliant Solutions -->
+<div class="space-y-3">
+<div class="w-9 h-9 text-gray-900">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-base font-bold text-gray-950">Compliant Solutions</h3>
+<p class="text-xs sm:text-[13px] text-gray-600 leading-relaxed">
+          Solutions designed to meet relevant fire safety standards and regulations.
+        </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Asymmetric Image Collage & Text Bar -->
+<div class="scroll-reveal delay-2 lg:col-span-6 relative">
+<!-- Top Right Accent Label -->
+<div class="flex items-start justify-end space-x-3 mb-6 pr-2">
+<div class="w-0.5 h-12 bg-gray-400"></div>
+<p class="text-[11px] font-bold uppercase tracking-wider text-gray-700 max-w-[200px] leading-tight">
+        STRUCTURAL FIRE PROTECTION FOR LONGER SAFER BUILDINGS.
+      </p>
+</div>
+<!-- Image Grid Composition -->
+<div class="grid grid-cols-12 gap-4 items-start">
+<!-- Large Vertical Card: Spray Cementitious Fireproofing on Concrete Column -->
+<div class="col-span-7 rounded-3xl overflow-hidden shadow-sm h-[390px] bg-gray-100">
+<img alt="Spray fireproofing on concrete pillar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHUgBp8JVpVX0wIbEKwX6vOR790gGOlbnb_14ZsUty0wa-b-SUFVHzXCdz6Y6j3q6FXHQBScLV277jWHlvH4gXSHdkidZEw7W0e-rrcU17mgs-n6QDoGMrOaHZyOGry-9l3rLHApjr2LAqMXnGUBeUCF6BMGuK0J4FTM0njNtKbt1ygNXRKZ_npWLn0yAbg615THUrXQtVyMxNt_w5pjkmHhpeg0wh1o_A_wvta5cQmaKOS0TQ0ExW"/>
+</div>
+<!-- Right Column Vertical: Penetration Firestop Seal with Pipes & Cables -->
+<div class="col-span-5 rounded-3xl overflow-hidden shadow-sm h-[390px] bg-gray-100">
+<img alt="Firestop cable penetration seal and red pipes" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9dNBysG5-cu9TIGiX0vbnKXQFide3VnwoL-q7apJIxuSrisSithQEIkKXo68kWCJLUWqVdbEIqBlms-R-ESJw9KUrNutsf8HNbUaJo3HPYvNge8KUlZwgS1qa6yk8F7PmlAbdKdiuhIA-ZVKyZMOZkoE4_r9FvL58Y6eocQyePsSKNlWrE_OkdmYRzoLvCS1uc8SVxKr9Tr3ka0a8F9AaKBwenG6FVsLYiovk8zEO3vkrYaFAdIiw"/>
+</div>
+<!-- Bottom Horizontal Card: HVAC Ducts & Overhead Fireproofed Deck -->
+<div class="col-span-7 rounded-3xl overflow-hidden shadow-sm h-[190px] bg-gray-100 -mt-2">
+<img alt="HVAC ventilation ducts and fire protection" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNYPQH5U9xsr9pGrZxrmsuIEL-yfgbqWI8dwo3zMOkih0TZCeWwBcs1Uq6dgLwNpJloNx0vA3PudfJpnV2HH75RnulhFg7qVAU6zg1F1pkL4wmZCT5LqQoeCM90qec42vsGh7rwrlz3KioNc0frlgSFls9jKFrmd7aVWL_3FZgqvuYAzkh-jY9wen40C78MG4XIwn6kzF58jt8BUlfXj8PWzfwl9Y92lij9_hr0nPBkCaOMzQtwnHy"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: WhatWeDoSection -->
+
+<!-- BEGIN: OurApproachSection -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24" data-purpose="our-approach-section">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+<!-- Left Side: Large Architectural Image with Vertical Bracket -->
+<div class="scroll-reveal lg:col-span-6 relative">
+<div class="relative rounded-3xl overflow-hidden shadow-sm h-[460px] lg:h-[500px] bg-gray-100">
+<img alt="Structural beam fireproofing and sprinkler lines" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN9dCAV4vqsB1zivjf4o-eYDiV0pihQINw9zpSObjXK4SRKJ4lB06WJfTTwOHcpIvRf04ExbBD3Ca-367vESDfCS5lTZeg31_7tYVTEy3kB3IMBCkIwzSnXJc0fOg9468js_wLVyvblcweOC-oQhzKIVtuuAMLFi8CXg0RXAebAGAY9-e04uXxWnqJOawJNIWzmEzm8iqvrFs_yG3qLufCx7ImoqHLpxCdY1dw0Dd8OT8xRZvCijWw"/>
+<!-- Floating vertical label badge -->
+<div class="absolute bottom-8 left-8 bg-black/65 backdrop-blur-md px-4 py-3 rounded-lg border-l-2 border-white max-w-[210px]">
+<p class="text-[10px] font-bold uppercase tracking-wider text-white leading-relaxed">
+          CERTIFIED SOLUTIONS BUILT FOR REAL-WORLD ENVIRONMENTS.
+        </p>
+</div>
+</div>
+</div>
+<!-- Right Side: Content & 3-Step Process -->
+<div class="lg:col-span-6 flex flex-col justify-center">
+<!-- Category Eyebrow -->
+<div class="scroll-reveal flex items-center gap-3 mb-5">
+<span class="w-7 h-0.5 bg-brand-orange"></span>
+<span class="text-xs font-bold uppercase tracking-widest text-gray-700">OUR APPROACH</span>
+</div>
+<!-- Section Title -->
+<h2 class="scroll-reveal delay-1 text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#091019] tracking-tight leading-[1.12] mb-4">
+        Engineered for <br/>
+<span class="accent-serif text-[#f2580c] text-[1.14em] font-normal leading-none">lasting safety.</span>
+</h2>
+<!-- Subtitle -->
+<p class="scroll-reveal delay-2 text-base text-gray-600 font-normal leading-relaxed mb-10 max-w-lg">
+        A clear process, focused execution and attention to detail at every stage.
+      </p>
+<!-- 3-Column Process Steps -->
+<div class="scroll-reveal delay-3 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-5 mb-11">
+<!-- Step 01 -->
+<div class="space-y-2">
+<span class="block text-2xl font-black text-gray-950 tracking-tight">01</span>
+<h4 class="text-xs font-black uppercase tracking-wider text-gray-900">ASSESS</h4>
+<p class="text-xs text-gray-500 leading-relaxed">
+          Understanding the building, requirements and fire safety standards.
+        </p>
+</div>
+<!-- Step 02 -->
+<div class="space-y-2">
+<span class="block text-2xl font-black text-gray-950 tracking-tight">02</span>
+<h4 class="text-xs font-black uppercase tracking-wider text-gray-900">DESIGN</h4>
+<p class="text-xs text-gray-500 leading-relaxed">
+          Recommending the right passive fire protection solutions.
+        </p>
+</div>
+<!-- Step 03 -->
+<div class="space-y-2">
+<span class="block text-2xl font-black text-gray-950 tracking-tight">03</span>
+<h4 class="text-xs font-black uppercase tracking-wider text-gray-900">IMPLEMENT</h4>
+<p class="text-xs text-gray-500 leading-relaxed">
+          Professional installation with quality checks and documentation.
+        </p>
+</div>
+</div>
+<!-- Bottom CTA Button -->
+<div class="scroll-reveal delay-4">
+<a class="inline-flex items-center gap-2.5 bg-[#0b131b] hover:bg-black text-white text-sm font-semibold px-6 py-3.5 rounded-full transition-all duration-200 shadow-sm hover:shadow" href="https://wa.me/916361725590?text=Hello,%20I%20would%20like%20to%20start%20my%20fire%20safety%20project." target="_blank" rel="noopener noreferrer">
+<span>Start Your Fire Safety Project</span>
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- END: OurApproachSection -->
+</main>
+
+<!-- BEGIN: SiteFooter -->
+<footer class="bg-[#070e14] text-white pt-16 pb-12 border-t border-slate-800" data-purpose="site-footer" id="contact">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <!-- Footer Main Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-gray-800/80">
+      <!-- Left Brand & Mission -->
+      <div class="scroll-reveal lg:col-span-4 space-y-7">
+        <div class="flex items-center gap-5">
+          <!-- Footer Logo -->
+          <a class="flex flex-col select-none" href="#">
+            <span class="text-2xl font-black tracking-tight text-white leading-none">
+              <span class="text-brand-orange">KRIS</span>JOE
+            </span>
+            <span class="text-[10px] font-extrabold tracking-[0.28em] text-white mt-1 leading-none">
+              BUILDTECK
+            </span>
+          </a>
+          <div class="w-px h-9 bg-gray-700"></div>
+          <p class="text-xs text-gray-300 max-w-[150px] leading-snug">
+            Building Safe, Smart, Sustainable Spaces.
+          </p>
+        </div>
+        <!-- Social Media Links -->
+        <div class="flex items-center space-x-4 pt-1">
+          <!-- LinkedIn -->
+          <a aria-label="LinkedIn" class="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-colors" href="https://www.linkedin.com/in/krisjoe-buildteck/" target="_blank" rel="noopener noreferrer">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.92 0 1.66-.74 1.66-1.66 0-.92-.74-1.66-1.66-1.66-.92 0-1.66.74-1.66 1.66 0 .92.74 1.66 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78z"></path>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a aria-label="Instagram" class="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-colors" href="https://www.instagram.com/krisjoebuildteck/?hl=en" target="_blank" rel="noopener noreferrer">
+            <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+              <rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <!-- Our Services Column -->
+      <div class="scroll-reveal delay-1 lg:col-span-4 space-y-4">
+        <h4 class="text-sm font-bold text-white tracking-wide">Our Services</h4>
+        <ul class="space-y-2 text-xs text-gray-400">
+          <li><a class="hover:text-white transition-colors" href="Construction.html">Construction</a></li>
+          <li><a class="hover:text-white transition-colors" href="Interiors.html">Interiors</a></li>
+          <li><a class="hover:text-white transition-colors" href="Residential Developments.html">Residential Developments</a></li>
+          <li><a class="hover:text-white transition-colors" href="Fire_Doors.html">Fire Doors</a></li>
+          <li><a class="hover:text-white transition-colors" href="Passive Fire Protection.html">Passive Fire Protection</a></li>
+        </ul>
+      </div>
+      <!-- Get In Touch Column -->
+      <div class="scroll-reveal delay-2 lg:col-span-4 space-y-4">
+        <h4 class="text-sm font-bold text-white tracking-wide">Get In Touch</h4>
+        <ul class="space-y-3 text-xs text-gray-400">
+          <li class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>+91 63617 25590</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>krisjoebuildteck@gmail.com</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>Bengaluru, Karnataka, India</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Footer Bottom Copyright & Back to Top -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+      <p>© 2026 KrisJoe Buildteck. All rights reserved.</p>
+      <div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="Back to top" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus:outline-none bg-gray-800/60 hover:bg-gray-800 px-3.5 py-2 rounded-full cursor-pointer">
+          <span>Back to top</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END: SiteFooter -->
+
+<!-- SCRIPT: Lenis Smooth Scroll & Repeatable Scroll Reveal Observer -->
+<script>
+  // Initialize Lenis Smooth Scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    smoothWheel: true,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Scroll Progress Bar
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.pageYOffset / totalHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }, { passive: true });
+
+  // REPEATABLE SCROLL REVEAL & SLIDE-UP OBSERVER
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      revealElements.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          // Re-arm element so each scroll direction triggers the slide-up animation cleanly
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  });
+</script>
+
+</body>
+</html>

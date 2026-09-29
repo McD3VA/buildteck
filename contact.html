@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+<title>Krisjoe Buildteck - Get in Touch</title>
+<!-- Google Fonts: Inter & Playfair Display -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- GSAP & ScrollTrigger CDNs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- Lenis Smooth Scroll CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#f95707',
+              'orange-hover': '#e04c03',
+              'orange-light': '#fff3ed',
+              dark: '#0a1118',
+              slate: '#1e293b',
+              gray: '#64748b',
+              light: '#f8fafc'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS for Typography & Slide-Up Animations -->
+<style data-purpose="custom-typography">
+    /* Lenis Smooth Scroll Setup */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-scrolling iframe {
+      pointer-events: auto;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-italic-accent {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* PINNED HORIZONTAL SCROLL TRACK */
+    #horizontal-wrapper {
+      overflow: hidden;
+    }
+    #horizontal-track {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 200vw;
+    }
+    .horizontal-panel {
+      width: 100vw;
+      min-width: 100vw;
+      flex-shrink: 0;
+    }
+
+    /* SLIDE-UP ENTRANCE ANIMATIONS */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(48px) translateZ(0);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+
+    .scroll-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) translateZ(0);
+    }
+
+    .delay-1 { transition-delay: 90ms; }
+    .delay-2 { transition-delay: 180ms; }
+
+    /* Top Reading Progress Bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #f95707;
+      width: 0%;
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased selection:bg-orange-100 selection:text-orange-600">
+
+<!-- Top Progress Indicator -->
+<div id="scroll-progress"></div>
+
+<!-- BEGIN: NavigationBar -->
+<header class="w-full bg-white/95 backdrop-blur-md sticky top-0 z-50 transition-all border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a class="flex flex-col select-none group" data-purpose="site-brand-logo" href="buildtech.html">
+      <span class="text-2xl font-black tracking-tight text-black leading-none flex items-center">
+        <span class="text-brand-orange">KRIS</span>JOE
+      </span>
+      <span class="text-[10px] font-extrabold tracking-[0.28em] text-black mt-1 leading-none">
+        BUILDTECK
+      </span>
+    </a>
+    <!-- Navigation Links -->
+    <nav class="hidden md:flex items-center space-x-9 text-sm font-semibold text-gray-700" data-purpose="main-navigation">
+      <a class="transition-colors hover:text-brand-orange" href="buildtech.html">Home</a>
+      <a class="hover:text-brand-orange transition-colors" href="aboutusbuildtek.html">About</a>
+      <div class="relative group">
+        <button class="flex items-center gap-1.5 hover:text-brand-orange transition-colors py-2 focus:outline-none">
+          <a href="services.html" class="hover:text-brand-orange transition-colors">Services</a>
+          <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-brand-orange transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+        <!-- Services Dropdown -->
+        <div class="absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200">
+          <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-2">
+            <a href="Construction.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Construction</a>
+            <a href="Interiors.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Interiors</a>
+            <a href="Residential Developments.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Residential Developments</a>
+            <a href="Fire_Doors.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Fire Doors</a>
+            <a href="Passive Fire Protection.html" class="block px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ff5a00] transition-colors">Passive Fire Protection</a>
+          </div>
+        </div>
+      </div>
+      <a class="hover:text-brand-orange transition-colors" href="projects.html">Projects</a>
+      <div class="relative py-2 text-black font-bold">
+        <a class="text-black" href="contact.html">Contact</a>
+        <span class="absolute bottom-0 left-0 w-full h-[3px] bg-brand-orange rounded-full"></span>
+      </div>
+    </nav>
+    <!-- Right Header Actions (CTA) -->
+    <div class="flex items-center gap-3">
+      <a class="inline-flex items-center gap-2 bg-[#ff5a00] hover:bg-[#ea5200] text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200" href="https://wa.me/916361725590?text=Hello,%20I%20would%20like%20to%20get%20a%20quote." target="_blank" rel="noopener noreferrer">
+        <span>Get a Quote</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+<!-- END: NavigationBar -->
+
+<main>
+  <!-- BEGIN: HeroSection -->
+  <section class="relative bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 overflow-hidden" data-purpose="hero-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <!-- Hero Copy -->
+        <div class="lg:col-span-5 pr-0 lg:pr-2 scroll-reveal" data-purpose="hero-copy">
+          <div class="inline-flex items-center space-x-2.5 mb-5 px-3 py-1 rounded-full bg-orange-50/70 border border-orange-100">
+            <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+            <span class="text-[11px] font-bold tracking-widest text-slate-800 uppercase">GET IN TOUCH</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.35rem] font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+            Let’s build <br class="hidden sm:inline"/><span class="font-italic-accent text-brand-orange text-4xl sm:text-5xl lg:text-[3.75rem] font-normal leading-tight">something that lasts.</span>
+          </h1>
+          <p class="mt-6 text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-lg">
+            Tell us about your construction, interior or certified passive fire protection requirements. Our senior architectural engineering team is ready to discuss your project specifications.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a class="inline-flex items-center justify-center px-7 py-3 rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white text-sm font-semibold shadow-md shadow-orange-500/15 transition-all duration-200 hover:-translate-y-0.5" href="#contact-form">
+              Get a Quote <span class="ml-2 text-base leading-none">→</span>
+            </a>
+            <a class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white hover:bg-slate-50 border border-gray-200 text-slate-800 text-sm font-medium transition-all duration-200" href="tel:+916361725590">
+              <svg class="w-4 h-4 mr-2 text-brand-orange" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path>
+              </svg>
+              +91 63617 25590
+            </a>
+          </div>
+        </div>
+        <!-- Hero Image Container -->
+        <div class="lg:col-span-7 scroll-reveal delay-1" data-purpose="hero-image-container">
+          <div class="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] rounded-3xl overflow-hidden shadow-xl border border-gray-200/80 bg-slate-900 group">
+            <img alt="Modern luxury architectural building at twilight" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
+              <div class="backdrop-blur-md bg-black/40 border border-white/10 px-4 py-2 rounded-xl">
+                <p class="text-xs font-medium text-slate-200">Bengaluru Headquarters &amp; Projects Division</p>
+                <p class="text-[11px] text-brand-orange font-semibold tracking-wide">KrisJoe Buildteck Consultancy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END: HeroSection -->
+
+  <!-- BEGIN: QuickContactCards -->
+  <section class="py-6 bg-white scroll-reveal" data-purpose="contact-options-bar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <!-- Call Card -->
+        <div class="bg-white border border-gray-200/90 rounded-2xl p-6 relative flex flex-col justify-between shadow-sm hover:shadow-md hover:border-brand-orange/40 transition-all duration-200">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-sm">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+              </div>
+              <div>
+                <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase block">CALL US</span>
+                <a class="text-base sm:text-lg font-bold text-slate-900 hover:text-brand-orange transition-colors block leading-tight mt-0.5" href="tel:+916361725590">+91 63617 25590</a>
+              </div>
+            </div>
+            <a aria-label="Call Krisjoe Buildteck" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-slate-400 hover:text-brand-orange hover:border-brand-orange transition-colors" href="tel:+916361725590">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+            </a>
+          </div>
+          <p class="text-xs sm:text-[13px] text-slate-500 mt-4 leading-normal">Direct assistance for project inquiries, tenders, and technical consultation.</p>
+        </div>
+        <!-- Email Card -->
+        <div class="bg-white border border-gray-200/90 rounded-2xl p-6 relative flex flex-col justify-between shadow-sm hover:shadow-md hover:border-brand-orange/40 transition-all duration-200">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-sm">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+              </div>
+              <div>
+                <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase block">EMAIL US</span>
+                <a class="text-sm sm:text-[15px] font-bold text-slate-900 hover:text-brand-orange transition-colors block leading-tight mt-0.5 truncate max-w-[180px] sm:max-w-none" href="mailto:krisjoebuildteck@gmail.com">krisjoebuildteck@gmail.com</a>
+              </div>
+            </div>
+            <a aria-label="Email Krisjoe Buildteck" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-slate-400 hover:text-brand-orange hover:border-brand-orange transition-colors" href="mailto:krisjoebuildteck@gmail.com">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+            </a>
+          </div>
+          <p class="text-xs sm:text-[13px] text-slate-500 mt-4 leading-normal">Submit project drawings, BOQs, or requests for proposal directly to our team.</p>
+        </div>
+        <!-- Visit Card -->
+        <div class="bg-white border border-gray-200/90 rounded-2xl p-6 relative flex flex-col justify-between shadow-sm hover:shadow-md hover:border-brand-orange/40 transition-all duration-200">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center text-brand-orange flex-shrink-0 shadow-sm">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path></svg>
+              </div>
+              <div>
+                <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase block">VISIT US</span>
+                <p class="text-xs sm:text-[13px] font-bold text-slate-900 leading-tight mt-0.5">49, 2nd Cross, Ashok Nagar,</p>
+              </div>
+            </div>
+            <a aria-label="View Map Location" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-slate-400 hover:text-brand-orange hover:border-brand-orange transition-colors" href="#location-map">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+            </a>
+          </div>
+          <p class="text-xs sm:text-[13px] text-slate-500 mt-2 leading-relaxed">Virgonagar Post, Medahalli, Bengaluru – 560049, Karnataka, India</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END: QuickContactCards -->
+
+  <!-- BEGIN: Pinned Horizontal Scroll Section -->
+  <div id="horizontal-wrapper" class="bg-white">
+    <div id="horizontal-track">
+      
+      <!-- Panel 1: Location & Map Section -->
+      <div class="horizontal-panel py-14 lg:py-20 flex items-center" id="location-map" data-purpose="location-map-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <!-- Location Description -->
+            <div class="lg:col-span-6 pr-0 lg:pr-6" data-purpose="location-description">
+              <div class="flex items-center space-x-2.5 mb-3">
+                <span class="w-6 h-[2px] bg-brand-orange"></span>
+                <span class="text-xs font-bold tracking-widest text-slate-800 uppercase">OUR LOCATION</span>
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                Let’s <span class="font-italic-accent text-brand-orange font-normal">Meet.</span>
+              </h2>
+              <p class="mt-5 text-sm sm:text-[15px] text-slate-600 leading-relaxed font-normal">
+                Based in Bengaluru, Karnataka, we work across commercial construction, interiors and specialist fire protection engineering. Whether you’re planning a new build, a modern interior fit-out, or certified fire doors and passive fire stopping systems, our consulting engineers provide end-to-end guidance.
+              </p>
+              <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+                <div class="p-4 rounded-2xl bg-slate-50/70 border border-gray-100">
+                  <div class="w-9 h-9 rounded-xl bg-orange-100/70 text-brand-orange flex items-center justify-center mb-3 shadow-xs">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  </div>
+                  <h3 class="text-sm font-bold text-slate-900">Strategic Location</h3>
+                  <p class="mt-1 text-xs text-slate-500 leading-relaxed">Rapid transit connectivity to key East &amp; Central Bengaluru business hubs.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50/70 border border-gray-100">
+                  <div class="w-9 h-9 rounded-xl bg-orange-100/70 text-brand-orange flex items-center justify-center mb-3 shadow-xs">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  </div>
+                  <h3 class="text-sm font-bold text-slate-900">Client Meetings</h3>
+                  <p class="mt-1 text-xs text-slate-500 leading-relaxed">Dedicated consultation suites for architectural and blueprint reviews.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50/70 border border-gray-100">
+                  <div class="w-9 h-9 rounded-xl bg-orange-100/70 text-brand-orange flex items-center justify-center mb-3 shadow-xs">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  </div>
+                  <h3 class="text-sm font-bold text-slate-900">Pan-India Support</h3>
+                  <p class="mt-1 text-xs text-slate-500 leading-relaxed">Executing enterprise infrastructure projects across South India and beyond.</p>
+                </div>
+              </div>
+              <div class="mt-8 bg-slate-50 border border-gray-200/90 rounded-2xl p-4 flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs sm:text-[13px] font-semibold text-slate-800 leading-snug">49, 2nd Cross, Ashok Nagar, Virgonagar Post, Medahalli, Bengaluru – 560049, Karnataka, India</p>
+                  </div>
+                </div>
+                <a aria-label="Open Directions" class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-slate-500 hover:text-brand-orange transition-colors flex-shrink-0 ml-3" href="https://maps.google.com/?q=Ashok+Nagar+Virgonagar+Medahalli+Bengaluru" target="_blank" rel="noopener noreferrer">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+                </a>
+              </div>
+            </div>
+            <!-- Actual Google Map Embed Visual -->
+            <div class="lg:col-span-6" data-purpose="map-visual">
+              <div class="relative w-full h-[400px] sm:h-[460px] rounded-3xl overflow-hidden border border-gray-200 shadow-md bg-slate-100">
+                <iframe 
+                  title="KrisJoe Buildteck Location Map"
+                  class="w-full h-full border-0 filter contrast-[1.05]"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6974241680516!2d77.7190!3d13.0100!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1136b6b6b6b7%3A0x123456789abcdef!2sAshok%20Nagar%2C%20Virgonagar%20Post%2C%20Medahalli%2C%20Bengaluru%2C%20Karnataka%20560049!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md py-3 px-4 rounded-2xl shadow-lg border border-gray-200 flex items-center justify-between pointer-events-none">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center text-white shadow-sm shrink-0">
+                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"></path></svg>
+                    </div>
+                    <div>
+                      <span class="text-xs font-black text-slate-900 tracking-tight block leading-none">KrisJoe Buildteck</span>
+                      <span class="text-[10px] font-bold text-brand-orange tracking-wider uppercase block mt-0.5">Corporate Headquarters</span>
+                    </div>
+                  </div>
+                  <a href="https://maps.google.com/?q=Ashok+Nagar+Virgonagar+Medahalli+Bengaluru" target="_blank" rel="noopener noreferrer" class="pointer-events-auto text-xs font-bold bg-slate-900 hover:bg-brand-orange text-white px-3.5 py-2 rounded-xl transition-colors shadow-sm">
+                    Open in Maps →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Detailed Inquiry Form Section -->
+      <div class="horizontal-panel py-14 lg:py-20 bg-slate-50/80 border-l border-gray-200 flex items-center" id="contact-form" data-purpose="inquiry-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div class="lg:col-span-3 hidden lg:block" data-purpose="form-side-image">
+              <div class="w-full h-[640px] rounded-3xl overflow-hidden shadow-lg border border-gray-200 bg-slate-800 relative group">
+                <img alt="Contemporary architectural building stone entryway" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=800&auto=format&fit=crop"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                  <span class="text-[10px] font-bold tracking-widest text-brand-orange uppercase block mb-1">PORTFOLIO STANDARD</span>
+                  <p class="text-xs text-slate-200 font-medium leading-relaxed">Engineering precision meets sustainable spatial design.</p>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-4 flex flex-col justify-between h-full pt-2" data-purpose="conversation-contacts">
+              <div>
+                <div class="flex items-center space-x-2.5 mb-3">
+                  <span class="w-6 h-[2px] bg-brand-orange"></span>
+                  <span class="text-xs font-bold tracking-widest text-slate-800 uppercase">START A CONVERSATION</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                  Tell us <br/><span class="font-italic-accent text-brand-orange font-normal">about your project.</span>
+                </h2>
+                <p class="mt-4 text-sm text-slate-600 leading-relaxed font-normal">
+                  Share a few details about your project scope, timeline, and specifications. Submitting this form directly opens WhatsApp with your prefilled details.
+                </p>
+                <div class="mt-8 space-y-6">
+                  <div class="flex items-center space-x-4 p-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                    <div class="w-11 h-11 rounded-xl bg-orange-50 border border-orange-100 text-brand-orange flex items-center justify-center flex-shrink-0">
+                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+                    </div>
+                    <div>
+                      <span class="text-[10px] font-extrabold tracking-wider text-slate-400 uppercase block">PHONE</span>
+                      <a class="text-base font-bold text-slate-900 hover:text-brand-orange transition-colors" href="tel:+916361725590">+91 63617 25590</a>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-4 p-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                    <div class="w-11 h-11 rounded-xl bg-orange-50 border border-orange-100 text-brand-orange flex items-center justify-center flex-shrink-0">
+                      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+                    </div>
+                    <div>
+                      <span class="text-[10px] font-extrabold tracking-wider text-slate-400 uppercase block">EMAIL</span>
+                      <a class="text-sm sm:text-base font-bold text-slate-900 hover:text-brand-orange transition-colors break-all" href="mailto:krisjoebuildteck@gmail.com">krisjoebuildteck@gmail.com</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-10 lg:mt-24 p-4 rounded-xl bg-orange-50/50 border border-orange-100">
+                <p class="text-xs text-slate-600 flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span> <strong class="text-slate-900 ml-1">+91 63617 25590</strong></p>
+              </div>
+            </div>
+            
+            <!-- Functional Inquiry Form Card -->
+            <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/90 shadow-md" data-purpose="inquiry-form-card">
+              <form id="whatsapp-inquiry-form" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1.5" for="form-name">Your Name *</label>
+                    <input class="w-full px-4 py-3 rounded-xl border border-gray-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange bg-[#fcfdfd]" id="form-name" placeholder="e.g. Rahul Sharma" required type="text"/>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1.5" for="form-email">Your Email *</label>
+                    <input class="w-full px-4 py-3 rounded-xl border border-gray-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange bg-[#fcfdfd]" id="form-email" placeholder="e.g. rahul@company.com" required type="email"/>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1.5" for="form-phone">Phone Number *</label>
+                    <input class="w-full px-4 py-3 rounded-xl border border-gray-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange bg-[#fcfdfd]" id="form-phone" placeholder="+91" required type="tel"/>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1.5" for="form-category">Project Category</label>
+                    <div class="relative">
+                      <select class="w-full px-4 py-3 rounded-xl border border-gray-200 text-xs sm:text-sm text-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange bg-[#fcfdfd] appearance-none pr-8 cursor-pointer" id="form-category">
+                        <option value="General Inquiry">Select project category</option>
+                        <option value="Commercial Construction">Commercial Construction</option>
+                        <option value="Residential Development">Residential Development</option>
+                        <option value="Interior Architecture & Fit-Out">Interior Architecture &amp; Fit-Out</option>
+                        <option value="Passive Fire & Fire Doors">Passive Fire &amp; Fire Doors</option>
+                      </select>
+                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Interest Buttons -->
+                <div class="pt-2">
+                  <label class="block text-xs font-bold text-slate-800 mb-2">What are you looking for?</label>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="interest-pills">
+                    <button type="button" data-value="Construction" class="interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border-2 border-brand-orange bg-orange-50 text-brand-orange text-xs font-bold text-left transition-all"><span class="truncate">Construction</span></button>
+                    <button type="button" data-value="Interiors" class="interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-[#fbfcfd] hover:bg-gray-50 text-slate-700 text-xs font-medium text-left transition-all"><span class="truncate">Interiors</span></button>
+                    <button type="button" data-value="Residential" class="interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-[#fbfcfd] hover:bg-gray-50 text-slate-700 text-xs font-medium text-left transition-all"><span class="truncate">Residential</span></button>
+                    <button type="button" data-value="Fire Doors" class="interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-[#fbfcfd] hover:bg-gray-50 text-slate-700 text-xs font-medium text-left transition-all"><span class="truncate">Fire Doors</span></button>
+                    <button type="button" data-value="Passive Fire" class="interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-[#fbfcfd] hover:bg-gray-50 text-slate-700 text-xs font-medium text-left transition-all"><span class="truncate">Passive Fire</span></button>
+                    <button type="button" data-value="Other" class="interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-[#fbfcfd] hover:bg-gray-50 text-slate-700 text-xs font-medium text-left transition-all"><span class="truncate">Other</span></button>
+                  </div>
+                  <input type="hidden" id="selected-interest" value="Construction">
+                </div>
+
+                <div class="pt-1">
+                  <label class="block text-xs font-bold text-slate-800 mb-1.5" for="form-details">Project Details</label>
+                  <textarea class="w-full px-4 py-3 rounded-xl border border-gray-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand-orange focus:border-brand-orange bg-[#fcfdfd] resize-none" id="form-details" placeholder="Tell us about your project location, approximate area (sq. ft), timelines, and requirements..." rows="4"></textarea>
+                </div>
+                
+                <div class="pt-2">
+                  <button class="w-full py-3.5 px-6 rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white text-xs sm:text-sm font-bold flex items-center justify-center transition-all duration-200 shadow-md shadow-orange-500/20 hover:-translate-y-0.5 cursor-pointer" type="submit">
+                    Send Enquiry on WhatsApp <span class="ml-2 text-base leading-none">→</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- END: Pinned Horizontal Scroll Section -->
+
+  <!-- BEGIN: CallToActionBanner -->
+  <section class="relative bg-slate-950 py-16 lg:py-20 overflow-hidden scroll-reveal" data-purpose="bottom-cta-banner">
+    <div class="absolute inset-0 z-0">
+      <img alt="Luxury Building Twilight Facade" class="w-full h-full object-cover object-center opacity-20" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop"/>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/95 to-slate-900/90"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+        <div class="max-w-xl">
+          <div class="flex items-center space-x-2.5 mb-3">
+            <span class="w-6 h-[2px] bg-brand-orange"></span>
+            <span class="text-xs font-bold tracking-widest text-slate-400 uppercase">READY WHEN YOU ARE</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Have a <span class="font-italic-accent text-brand-orange font-normal">project in mind?</span>
+          </h2>
+          <p class="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+            Let’s discuss your construction, interior architecture, or specialized passive fire protection requirements.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-4">
+          <a class="px-8 py-3.5 rounded-full bg-brand-orange hover:bg-brand-orange-hover text-white text-sm font-bold inline-flex items-center transition-all duration-200 shadow-lg shadow-orange-500/20 hover:-translate-y-0.5" href="#contact-form">
+            Get a Quote <span class="ml-2 text-base leading-none">→</span>
+          </a>
+          <a class="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white text-sm font-semibold inline-flex items-center transition-all duration-200" href="tel:+916361725590">
+            <svg class="w-4 h-4 mr-2.5 text-brand-orange" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+            +91 63617 25590
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END: CallToActionBanner -->
+</main>
+
+<!-- BEGIN: SiteFooter -->
+<footer class="bg-[#070e14] text-white pt-16 pb-12 border-t border-slate-800" data-purpose="site-footer" id="contact">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <!-- Footer Main Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-gray-800/80">
+      <!-- Left Brand & Mission -->
+      <div class="scroll-reveal lg:col-span-4 space-y-7">
+        <div class="flex items-center gap-5">
+          <!-- Footer Logo -->
+          <a class="flex flex-col select-none" href="buildtech.html">
+            <span class="text-2xl font-black tracking-tight text-white leading-none">
+              <span class="text-brand-orange">KRIS</span>JOE
+            </span>
+            <span class="text-[10px] font-extrabold tracking-[0.28em] text-white mt-1 leading-none">
+              BUILDTECK
+            </span>
+          </a>
+          <div class="w-px h-9 bg-gray-700"></div>
+          <p class="text-xs text-gray-300 max-w-[150px] leading-snug">
+            Building Safe, Smart, Sustainable Spaces.
+          </p>
+        </div>
+        <!-- Social Media Links -->
+        <div class="flex items-center space-x-4 pt-1">
+          <!-- LinkedIn -->
+          <a aria-label="LinkedIn" class="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-colors" href="https://www.linkedin.com/in/krisjoe-buildteck/" target="_blank" rel="noopener noreferrer">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c.92 0 1.66-.74 1.66-1.66 0-.92-.74-1.66-1.66-1.66-.92 0-1.66.74-1.66 1.66 0 .92.74 1.66 1.66 1.66m1.39 9.74v-8.37H5.07v8.37h2.78z"></path>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a aria-label="Instagram" class="w-8 h-8 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-colors" href="https://www.instagram.com/krisjoebuildteck/?hl=en" target="_blank" rel="noopener noreferrer">
+            <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+              <rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <!-- Our Services Column -->
+      <div class="scroll-reveal delay-1 lg:col-span-4 space-y-4">
+        <h4 class="text-sm font-bold text-white tracking-wide">Our Services</h4>
+        <ul class="space-y-2 text-xs text-gray-400">
+          <li><a class="hover:text-white transition-colors" href="Construction.html">Construction</a></li>
+          <li><a class="hover:text-white transition-colors" href="Interiors.html">Interiors</a></li>
+          <li><a class="hover:text-white transition-colors" href="Residential Developments.html">Residential Developments</a></li>
+          <li><a class="hover:text-white transition-colors" href="Fire_Doors.html">Fire Doors</a></li>
+          <li><a class="hover:text-white transition-colors" href="Passive Fire Protection.html">Passive Fire Protection</a></li>
+        </ul>
+      </div>
+      <!-- Get In Touch Column -->
+      <div class="scroll-reveal delay-2 lg:col-span-4 space-y-4">
+        <h4 class="text-sm font-bold text-white tracking-wide">Get In Touch</h4>
+        <ul class="space-y-3 text-xs text-gray-400">
+          <li class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>+91 63617 25590</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>krisjoebuildteck@gmail.com</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span>Bengaluru, Karnataka, India</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Footer Bottom Copyright & Back to Top -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+      <p>© 2026 KrisJoe Buildteck. All rights reserved.</p>
+      <div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="Back to top" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors focus:outline-none bg-gray-800/60 hover:bg-gray-800 px-3.5 py-2 rounded-full cursor-pointer">
+          <span>Back to top</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END: SiteFooter -->
+
+<!-- SCRIPTS: Lenis, GSAP, Interest Pills & WhatsApp Form Integration -->
+<script>
+  // Initialize Lenis Smooth Scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    smoothWheel: true,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Sync Lenis with GSAP ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
+
+  // Pinned Horizontal Scroll Animation
+  let horizontalTrack = document.querySelector("#horizontal-track");
+  
+  gsap.to(horizontalTrack, {
+    x: () => -(horizontalTrack.scrollWidth - document.documentElement.clientWidth),
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#horizontal-wrapper",
+      pin: true,
+      scrub: 1,
+      end: () => "+=" + horizontalTrack.offsetWidth,
+      invalidateOnRefresh: true,
+      anticipatePin: 1
+    }
+  });
+
+  // Scroll Progress Bar
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.pageYOffset / totalHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }, { passive: true });
+
+  // Scroll Reveal Observer (Slide-up animation)
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      revealElements.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  });
+
+  // Interactive Interest Pills Selection
+  const interestPills = document.querySelectorAll('.interest-pill');
+  const selectedInterestInput = document.getElementById('selected-interest');
+
+  interestPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      interestPills.forEach(p => {
+        p.className = "interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-[#fbfcfd] hover:bg-gray-50 text-slate-700 text-xs font-medium text-left transition-all";
+      });
+      pill.className = "interest-pill flex items-center space-x-2 px-3 py-2.5 rounded-xl border-2 border-brand-orange bg-orange-50 text-brand-orange text-xs font-bold text-left transition-all";
+      selectedInterestInput.value = pill.getAttribute('data-value');
+    });
+  });
+
+  // WhatsApp Form Submission Handler
+  const inquiryForm = document.getElementById('whatsapp-inquiry-form');
+  inquiryForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('form-name').value.trim();
+    const email = document.getElementById('form-email').value.trim();
+    const phone = document.getElementById('form-phone').value.trim();
+    const category = document.getElementById('form-category').value;
+    const interest = selectedInterestInput.value;
+    const details = document.getElementById('form-details').value.trim();
+
+    // Construct Clean Professional WhatsApp Message
+    const message = `*New Project Enquiry - KrisJoe Buildteck*` +
+      `\n\n*Name:* ${name}` +
+      `\n*Phone:* ${phone}` +
+      `\n*Email:* ${email}` +
+      `\n*Project Category:* ${category}` +
+      `\n*Looking For:* ${interest}` +
+      `\n*Details:* ${details || 'None provided'}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/916361725590?text=${encodedMessage}`;
+
+    // Open WhatsApp in new tab / redirect
+    window.open(whatsappUrl, '_blank');
+  });
+</script>
+
+</body>
+</html>
